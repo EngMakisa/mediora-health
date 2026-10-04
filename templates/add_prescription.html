@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+
+{% block title %}Add Prescription - MEDIORA HEALTH{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-eyebrow">
+                HEALTH MANAGEMENT
+            </div>
+
+            <h1 class="page-title">
+                Add Prescription
+            </h1>
+
+            <p class="page-description">
+                Store prescription details so important treatment
+                information, expiry dates and refill dates stay organized.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a
+                href="{{ url_for('prescriptions') }}"
+                class="secondary-button"
+            >
+                Back to Prescriptions
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORM CARD -->
+    <div class="medication-form-card">
+
+        <!-- FORM HEADER -->
+        <div class="form-card-header">
+
+            <div class="form-header-icon">
+
+                <div class="prescription-icon">
+                    Rx
+                </div>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    Prescription Details
+                </h2>
+
+                <p>
+                    Enter the information provided on the prescription.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            method="POST"
+            class="medication-form"
+        >
+
+            <!-- SECTION 01 -->
+            <div class="form-section">
+
+                <div class="form-section-heading">
+
+                    <span class="form-section-number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Prescription Information
+                        </h3>
+
+                        <p>
+                            Identify the prescription and prescribing doctor.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- PRESCRIPTION NAME -->
+                    <div class="form-field">
+
+                        <label for="prescription_name">
+                            Prescription Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="prescription_name"
+                            name="prescription_name"
+                            placeholder="e.g. Blood Pressure Treatment"
+                            value="{{ request.form.get('prescription_name', '') }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DOCTOR -->
+                    <div class="form-field">
+
+                        <label for="doctor_name">
+                            Doctor / Prescriber
+                        </label>
+
+                        <input
+                            type="text"
+                            id="doctor_name"
+                            name="doctor_name"
+                            placeholder="e.g. Dr. John Banda"
+                            value="{{ request.form.get('doctor_name', '') }}"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECTION 02 -->
+            <div class="form-section">
+
+                <div class="form-section-heading">
+
+                    <span class="form-section-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Important Dates
+                        </h3>
+
+                        <p>
+                            Record the dates associated with this prescription.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- ISSUE DATE -->
+                    <div class="form-field">
+
+                        <label for="issue_date">
+                            Issue Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="issue_date"
+                            name="issue_date"
+                            value="{{ request.form.get('issue_date', '') }}"
+                        >
+
+                    </div>
+
+
+                    <!-- EXPIRY DATE -->
+                    <div class="form-field">
+
+                        <label for="expiry_date">
+                            Expiry Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="expiry_date"
+                            name="expiry_date"
+                            value="{{ request.form.get('expiry_date', '') }}"
+                        >
+
+                        <small>
+                            Used to help you identify expired prescriptions.
+                        </small>
+
+                    </div>
+
+
+                    <!-- REFILL DATE -->
+                    <div class="form-field">
+
+                        <label for="refill_date">
+                            Refill Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="refill_date"
+                            name="refill_date"
+                            value="{{ request.form.get('refill_date', '') }}"
+                        >
+
+                        <small>
+                            Add the next expected refill date if applicable.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECTION 03 -->
+            <div class="form-section">
+
+                <div class="form-section-heading">
+
+                    <span class="form-section-number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Notes
+                        </h3>
+
+                        <p>
+                            Add additional information you want to keep
+                            with this prescription.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="notes">
+                        Prescription Notes
+                    </label>
+
+                    <textarea
+                        id="notes"
+                        name="notes"
+                        rows="5"
+                        placeholder="e.g. Follow-up appointment in three months."
+                    >{{ request.form.get('notes', '') }}</textarea>
+
+                    <small>
+                        Keep notes factual and follow the instructions
+                        provided by your healthcare professional.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM FOOTER -->
+            <div class="form-footer">
+
+                <div class="required-note">
+
+                    <span>*</span>
+                    Required fields
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('prescriptions') }}"
+                        class="secondary-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Save Prescription
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

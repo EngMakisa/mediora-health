@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% block title %}Prescriptions - MEDIORA HEALTH{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-eyebrow">
+                HEALTH MANAGEMENT
+            </div>
+
+            <h1 class="page-title">
+                Prescriptions
+            </h1>
+
+            <p class="page-description">
+                Manage your prescriptions and keep important
+                treatment information organized.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a
+                href="{{ url_for('add_prescription') }}"
+                class="primary-button"
+            >
+                Add Prescription
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION BANNER -->
+    <div class="info-banner">
+
+        <div class="info-icon">
+            P
+        </div>
+
+        <div>
+
+            <h3>
+                Prescription Management
+            </h3>
+
+            <p>
+                Keep prescription information organized and monitor
+                important issue, expiry and refill dates.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRESCRIPTIONS -->
+    {% if prescriptions %}
+
+        <div class="prescription-grid">
+
+            {% for prescription in prescriptions %}
+
+                <article class="prescription-card">
+
+                    <!-- CARD HEADER -->
+                    <div class="card-top">
+
+                        <div class="prescription-title">
+
+                            <div class="prescription-icon">
+                                P
+                            </div>
+
+                            <div>
+
+                                <h2>
+                                    {{ prescription['prescription_name'] }}
+                                </h2>
+
+                                {% if prescription['doctor_name'] %}
+
+                                    <span>
+                                        Dr. {{ prescription['doctor_name'] }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span>
+                                        Doctor information not provided
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        {% if prescription['expiry_date'] %}
+
+                            <span
+                                class="status prescription-status"
+                                data-expiry="{{ prescription['expiry_date'] }}"
+                            >
+                                Checking...
+                            </span>
+
+                        {% else %}
+
+                            <span class="status status-pending">
+                                No Expiry Date
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- DETAILS -->
+                    <div class="details">
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Issue Date
+                            </div>
+
+                            <div class="detail-value">
+                                {{ prescription['issue_date'] or 'Not provided' }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Expiry Date
+                            </div>
+
+                            <div class="detail-value">
+                                {{ prescription['expiry_date'] or 'Not provided' }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Refill Date
+                            </div>
+
+                            <div class="detail-value">
+                                {{ prescription['refill_date'] or 'Not scheduled' }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Prescribed By
+                            </div>
+
+                            <div class="detail-value">
+                                {{ prescription['doctor_name'] or 'Not provided' }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NOTES -->
+                    {% if prescription['notes'] %}
+
+                        <div class="notes">
+
+                            <div class="notes-title">
+                                Notes
+                            </div>
+
+                            <div class="notes-text">
+                                {{ prescription['notes'] }}
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                P
+            </div>
+
+            <h2>
+                No prescriptions added
+            </h2>
+
+            <p>
+                You have not added any prescriptions yet.
+                Add your first prescription to keep your
+                treatment information organized.
+            </p>
+
+            <a
+                href="{{ url_for('add_prescription') }}"
+                class="primary-button"
+            >
+                Add Prescription
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- PRESCRIPTION STATUS -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const statusElements =
+        document.querySelectorAll(".prescription-status");
+
+    const today = new Date();
+
+    const todayString =
+        today.getFullYear() +
+        "-" +
+        String(today.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(today.getDate()).padStart(2, "0");
+
+
+    statusElements.forEach(function (statusElement) {
+
+        const expiryDate =
+            statusElement.getAttribute("data-expiry");
+
+
+        if (!expiryDate) {
+
+            statusElement.textContent = "No Expiry Date";
+
+            statusElement.classList.add("status-pending");
+
+            return;
+        }
+
+
+        if (expiryDate < todayString) {
+
+            statusElement.textContent = "Expired";
+
+            statusElement.classList.add("status-expired");
+
+        } else {
+
+            statusElement.textContent = "Active";
+
+            statusElement.classList.add("status-active");
+
+        }
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

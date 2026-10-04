@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedTrack Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f5;
+            color: #1f2937;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 240px;
+            background: #123c2a;
+            color: white;
+            padding: 25px 18px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 13px 14px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+        }
+
+        .nav a:hover {
+            background: #1f5a40;
+        }
+
+        .logout {
+            margin-top: 30px;
+            background: #8b1e1e;
+        }
+
+        /* MAIN */
+
+        .main {
+            flex: 1;
+            padding: 35px;
+        }
+
+        .top-title h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .top-title p {
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        /* REMINDER */
+
+        .reminder {
+            margin-top: 25px;
+            background: #fff4cc;
+            border-left: 6px solid #d99b00;
+            padding: 18px 22px;
+            border-radius: 14px;
+        }
+
+        .reminder h3 {
+            margin: 0 0 8px 0;
+            color: #765600;
+        }
+
+        .reminder p {
+            margin: 0;
+            color: #765600;
+        }
+
+        .reminder-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .reminder-list li {
+            margin-bottom: 5px;
+        }
+
+        /* WELCOME */
+
+        .welcome {
+            margin-top: 25px;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .welcome h2 {
+            margin-top: 0;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .summary-card h3 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .summary-card p {
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* SECTION HEADER */
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            margin-bottom: 18px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+        }
+
+        .add-button {
+            text-decoration: none;
+            background: #176b45;
+            color: white;
+            padding: 11px 17px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .add-button:hover {
+            background: #125437;
+        }
+
+        /* DOSE CARDS */
+
+        .dose-card {
+            background: white;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .dose-card.due {
+            border-left: 6px solid #d99b00;
+        }
+
+        .dose-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .medication-name {
+            font-size: 21px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+        }
+
+        .dose-info {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        .dose-time {
+            font-size: 22px;
+            font-weight: bold;
+            color: #176b45;
+            white-space: nowrap;
+        }
+
+        /* DUE LABEL */
+
+        .due-label {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #fff0b8;
+            color: #765600;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background: #fff4cc;
+            color: #8a6700;
+        }
+
+        .status-taken {
+            background: #d9f5e5;
+            color: #176b45;
+        }
+
+        .status-skipped {
+            background: #fde2e2;
+            color: #a12626;
+        }
+
+        .status-snoozed {
+            background: #e2ecff;
+            color: #2456a6;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .actions form {
+            margin: 0;
+        }
+
+        .actions button {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .taken-button {
+            background: #176b45;
+            color: white;
+        }
+
+        .skipped-button {
+            background: #eeeeee;
+            color: #333333;
+        }
+
+        .snooze-button {
+            background: #dce8ff;
+            color: #2456a6;
+        }
+
+        .actions button:hover {
+            opacity: 0.85;
+        }
+
+        .snooze-info {
+            margin-top: 10px;
+            color: #2456a6;
+            font-size: 14px;
+        }
+
+        /* EMPTY STATE */
+
+        .empty {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 1000px) {
+
+            .summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .main {
+                padding: 20px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .dose-top {
+                flex-direction: column;
+            }
+
+            .dose-time {
+                white-space: normal;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            MedTrack
+        </div>
+
+        <nav class="nav">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/medications">
+                Medications
+            </a>
+
+            <a href="/add-medication">
+                Add Medication
+            </a>
+
+            <a href="/prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/add-prescription">
+                Add Prescription
+            </a>
+
+            <a href="/adherence">
+                Adherence
+            </a>
+
+            <a href="/logout"
+               class="logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <div class="top-title">
+
+            <h1>
+                Today's medication overview
+            </h1>
+
+            <p>
+                Keep track of your scheduled medication doses.
+            </p>
+
+        </div>
+
+
+        <!-- REMINDER -->
+
+        {% if due_doses > 0 %}
+
+            <section class="reminder">
+
+                <h3>
+                    🔔 Medication reminder
+                </h3>
+
+                <p>
+                    You have
+                    <strong>{{ due_doses }}</strong>
+                    medication dose(s) due now.
+                </p>
+
+                <ul class="reminder-list">
+
+                    {% for dose in doses %}
+
+                        {% if dose["is_due"] %}
+
+                            <li>
+
+                                <strong>
+                                    {{ dose["medication_name"] }}
+                                </strong>
+
+                                —
+                                {{ dose["dosage"] }}
+                                at
+                                {{ dose["scheduled_time"] }}
+
+                            </li>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </ul>
+
+            </section>
+
+        {% endif %}
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <h2>
+                Welcome to MedTrack 💊
+            </h2>
+
+            <p>
+                Keep track of your medications, prescriptions
+                and daily adherence in one place.
+            </p>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+
+        <section class="summary">
+
+            <div class="summary-card">
+
+                <h3>
+                    {{ completed_doses }}
+                </h3>
+
+                <p>
+                    Completed
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>
+                    {{ pending_doses }}
+                </h3>
+
+                <p>
+                    Pending
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>
+                    {{ skipped_doses }}
+                </h3>
+
+                <p>
+                    Skipped
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>
+                    {{ snoozed_doses }}
+                </h3>
+
+                <p>
+                    Snoozed
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- TODAY'S MEDICATIONS -->
+
+        <div class="section-header">
+
+            <h2>
+                Today's Medication Doses
+            </h2>
+
+            <a href="/add-medication"
+               class="add-button">
+                + Add Medication
+            </a>
+
+        </div>
+
+
+        {% if doses %}
+
+            {% for dose in doses %}
+
+                <div class="dose-card {% if dose['is_due'] %}due{% endif %}">
+
+                    <div class="dose-top">
+
+                        <div>
+
+                            <div class="medication-name">
+                                {{ dose["medication_name"] }}
+                            </div>
+
+                            <div class="dose-info">
+
+                                <strong>Dosage:</strong>
+                                {{ dose["dosage"] }}
+
+                                <br>
+
+                                <strong>Frequency:</strong>
+                                {{ dose["frequency"] }}
+
+                                <br>
+
+                                <strong>Instructions:</strong>
+                                {{ dose["instructions"] or "No instructions provided." }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="dose-time">
+
+                            {{ dose["scheduled_time"] }}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DUE LABEL -->
+
+                    {% if dose["is_due"] %}
+
+                        <div class="due-label">
+
+                            🔔 Medication due now
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- STATUS -->
+
+                    {% if dose["status"] == "Taken" %}
+
+                        <span class="status status-taken">
+                            ✓ Taken
+                        </span>
+
+
+                    {% elif dose["status"] == "Skipped" %}
+
+                        <span class="status status-skipped">
+                            Skipped
+                        </span>
+
+
+                    {% elif dose["status"] == "Snoozed" %}
+
+                        <span class="status status-snoozed">
+                            Snoozed
+                        </span>
+
+                        {% if dose["snoozed_until"] %}
+
+                            <div class="snooze-info">
+
+                                Snoozed until:
+                                {{ dose["snoozed_until"] }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                    {% else %}
+
+                        <span class="status status-pending">
+                            Pending
+                        </span>
+
+                    {% endif %}
+
+
+                    <!-- ACTION BUTTONS -->
+
+                    {% if dose["status"] == "Pending" %}
+
+                        <div class="actions">
+
+                            <form
+                                action="/dose/{{ dose['dose_id'] }}/Taken"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="taken-button">
+
+                                    ✓ Taken
+
+                                </button>
+
+                            </form>
+
+
+                            <form
+                                action="/dose/{{ dose['dose_id'] }}/Skipped"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="skipped-button">
+
+                                    Skipped
+
+                                </button>
+
+                            </form>
+
+
+                            <form
+                                action="/dose/{{ dose['dose_id'] }}/Snoozed"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="snooze-button">
+
+                                    Snooze 30 min
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                    {% elif dose["status"] == "Snoozed" %}
+
+                        <div class="actions">
+
+                            <form
+                                action="/dose/{{ dose['dose_id'] }}/Taken"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="taken-button">
+
+                                    ✓ Taken
+
+                                </button>
+
+                            </form>
+
+
+                            <form
+                                action="/dose/{{ dose['dose_id'] }}/Skipped"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="skipped-button">
+
+                                    Skipped
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <p>
+                    No medication doses are scheduled for today.
+                </p>
+
+                <a href="/add-medication"
+                   class="add-button">
+
+                    Add your first medication
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

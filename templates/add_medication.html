@@ -1,0 +1,435 @@
+{% extends "base.html" %}
+
+{% block title %}Add Medication - MEDIORA HEALTH{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-eyebrow">
+                MEDICATION MANAGEMENT
+            </div>
+
+            <h1 class="page-title">
+                Add Medication
+            </h1>
+
+            <p class="page-description">
+                Add a medication to your treatment schedule and keep
+                its instructions organized in one place.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a
+                href="{{ url_for('medications') }}"
+                class="secondary-button"
+            >
+                Back to Medications
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORM CARD -->
+    <div class="medication-form-card">
+
+        <!-- FORM INTRO -->
+        <div class="form-card-header">
+
+            <div class="form-header-icon">
+
+                <div class="form-pill">
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    Medication Details
+                </h2>
+
+                <p>
+                    Enter the information exactly as it appears
+                    on your medication or prescription.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            method="POST"
+            class="medication-form"
+        >
+
+            <!-- SECTION 01 -->
+            <div class="form-section">
+
+                <div class="form-section-heading">
+
+                    <span class="form-section-number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Basic Information
+                        </h3>
+
+                        <p>
+                            Identify the medication and prescribed dosage.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- MEDICATION NAME -->
+                    <div class="form-field">
+
+                        <label for="medication_name">
+                            Medication Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="medication_name"
+                            name="medication_name"
+                            placeholder="e.g. Paracetamol"
+                            value="{{ request.form.get('medication_name', '') }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DOSAGE -->
+                    <div class="form-field">
+
+                        <label for="dosage">
+                            Dosage
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="dosage"
+                            name="dosage"
+                            placeholder="e.g. 500 mg"
+                            value="{{ request.form.get('dosage', '') }}"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECTION 02 -->
+            <div class="form-section">
+
+                <div class="form-section-heading">
+
+                    <span class="form-section-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Medication Schedule
+                        </h3>
+
+                        <p>
+                            Set when and how often the medication should be taken.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- FREQUENCY -->
+                    <div class="form-field">
+
+                        <label for="frequency">
+                            Frequency
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="frequency"
+                            name="frequency"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                disabled
+                                {% if not request.form.get('frequency') %}
+                                    selected
+                                {% endif %}
+                            >
+                                Select frequency
+                            </option>
+
+                            <option
+                                value="Once daily"
+                                {% if request.form.get('frequency') == 'Once daily' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Once daily
+                            </option>
+
+                            <option
+                                value="Twice daily"
+                                {% if request.form.get('frequency') == 'Twice daily' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Twice daily
+                            </option>
+
+                            <option
+                                value="Three times daily"
+                                {% if request.form.get('frequency') == 'Three times daily' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Three times daily
+                            </option>
+
+                            <option
+                                value="Four times daily"
+                                {% if request.form.get('frequency') == 'Four times daily' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Four times daily
+                            </option>
+
+                            <option
+                                value="Every 4 hours"
+                                {% if request.form.get('frequency') == 'Every 4 hours' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Every 4 hours
+                            </option>
+
+                            <option
+                                value="Every 6 hours"
+                                {% if request.form.get('frequency') == 'Every 6 hours' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Every 6 hours
+                            </option>
+
+                            <option
+                                value="Every 8 hours"
+                                {% if request.form.get('frequency') == 'Every 8 hours' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Every 8 hours
+                            </option>
+
+                            <option
+                                value="Every 12 hours"
+                                {% if request.form.get('frequency') == 'Every 12 hours' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Every 12 hours
+                            </option>
+
+                            <option
+                                value="As needed"
+                                {% if request.form.get('frequency') == 'As needed' %}
+                                    selected
+                                {% endif %}
+                            >
+                                As needed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TIME -->
+                    <div class="form-field">
+
+                        <label for="time_to_take">
+                            Time to Take
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="time"
+                            id="time_to_take"
+                            name="time_to_take"
+                            value="{{ request.form.get('time_to_take', '') }}"
+                            required
+                        >
+
+                        <small>
+                            The main time this medication is scheduled.
+                        </small>
+
+                    </div>
+
+
+                    <!-- START DATE -->
+                    <div class="form-field">
+
+                        <label for="start_date">
+                            Start Date
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="start_date"
+                            name="start_date"
+                            value="{{ request.form.get('start_date', '') }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- END DATE -->
+                    <div class="form-field">
+
+                        <label for="end_date">
+                            End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="end_date"
+                            name="end_date"
+                            value="{{ request.form.get('end_date', '') }}"
+                        >
+
+                        <small>
+                            Leave blank if there is no specified end date.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECTION 03 -->
+            <div class="form-section">
+
+                <div class="form-section-heading">
+
+                    <span class="form-section-number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Instructions
+                        </h3>
+
+                        <p>
+                            Add any instructions that should be remembered
+                            when taking this medication.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="instructions">
+                        Medication Instructions
+                    </label>
+
+                    <textarea
+                        id="instructions"
+                        name="instructions"
+                        rows="5"
+                        placeholder="e.g. Take after food with a glass of water."
+                    >{{ request.form.get('instructions', '') }}</textarea>
+
+                    <small>
+                        This information is for organization and reminders.
+                        Always follow the instructions provided by your healthcare professional.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM FOOTER -->
+            <div class="form-footer">
+
+                <div class="required-note">
+                    <span>*</span>
+                    Required fields
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('medications') }}"
+                        class="secondary-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Save Medication
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

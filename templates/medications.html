@@ -1,0 +1,199 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}My Medications | MEDIORA HEALTH{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-eyebrow">
+                MEDICATION MANAGEMENT
+            </div>
+
+            <h1 class="page-title">
+                My Medications
+            </h1>
+
+            <p class="page-description">
+                Manage your medications, schedules, and treatment information.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a
+                href="{{ url_for('add_medication') }}"
+                class="primary-button"
+            >
+                Add Medication
+            </a>
+
+        </div>
+
+    </div>
+
+
+    {% if medications %}
+
+    <div class="prescription-grid">
+
+        {% for medication in medications %}
+
+        <div class="prescription-card">
+
+            <div class="card-top">
+
+                <div class="prescription-icon">
+                    +
+                </div>
+
+                <div>
+                    <h2 class="prescription-title">
+                        {{ medication['medication_name'] }}
+                    </h2>
+
+                    <div class="status status-active">
+                        ACTIVE
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="details">
+
+                <div>
+                    <div class="detail-label">
+                        DOSAGE
+                    </div>
+
+                    <div class="detail-value">
+                        {{ medication['dosage'] or 'Not specified' }}
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="detail-label">
+                        TIME TO TAKE
+                    </div>
+
+                    <div class="detail-value">
+                        {{ medication['time_to_take'] or 'Not specified' }}
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="detail-label">
+                        FREQUENCY
+                    </div>
+
+                    <div class="detail-value">
+                        {{ medication['frequency'] or 'Not specified' }}
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="detail-label">
+                        START DATE
+                    </div>
+
+                    <div class="detail-value">
+                        {{ medication['start_date'] or 'Not specified' }}
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="detail-label">
+                        END DATE
+                    </div>
+
+                    <div class="detail-value">
+                        {{ medication['end_date'] or 'Ongoing' }}
+                    </div>
+                </div>
+
+            </div>
+
+
+            {% if medication['instructions'] %}
+
+            <div class="notes">
+
+                <div class="notes-title">
+                    Instructions
+                </div>
+
+                <div class="notes-text">
+                    {{ medication['instructions'] }}
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="medication-card-actions">
+
+                <a
+                    href="{{ url_for('edit_medication', medication_id=medication['id']) }}"
+                    class="secondary-button"
+                >
+                    Edit
+                </a>
+
+                <a
+                    href="{{ url_for('delete_medication', medication_id=medication['id']) }}"
+                    class="danger-button"
+                >
+                    Delete
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <div class="empty-icon">
+            +
+        </div>
+
+        <h2>
+            No medications added
+        </h2>
+
+        <p>
+            Add your first medication to begin managing your treatment schedule.
+        </p>
+
+        <a
+            href="{{ url_for('add_medication') }}"
+            class="primary-button"
+        >
+            Add Medication
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+```

@@ -1,0 +1,218 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}Delete Medication | MEDIORA HEALTH{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <div class="page-header">
+        <div class="page-header-content">
+
+            <div class="page-eyebrow">
+                MEDICATION MANAGEMENT
+            </div>
+
+            <h1 class="page-title">
+                Delete Medication
+            </h1>
+
+            <p class="page-description">
+                Review the medication details before permanently removing it.
+            </p>
+
+        </div>
+    </div>
+
+
+    <div class="medication-form-card">
+
+        <div class="form-card-header">
+
+            <div>
+                <div class="form-pill">
+                    CONFIRM ACTION
+                </div>
+
+                <h2>
+                    Delete this medication?
+                </h2>
+
+                <p>
+                    You are about to permanently remove this medication
+                    from your MEDIORA account.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <div class="form-section-heading">
+
+                <span class="form-section-number">
+                    1
+                </span>
+
+                <div>
+                    <strong>
+                        Medication Details
+                    </strong>
+
+                    <span>
+                        Please confirm that this is the medication you want to remove.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-field">
+
+                    <label>
+                        Medication
+                    </label>
+
+                    <div class="detail-value">
+                        {{ medication['medication_name'] }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Dosage
+                    </label>
+
+                    <div class="detail-value">
+                        {{ medication['dosage'] or 'Not specified' }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Time to Take
+                    </label>
+
+                    <div class="detail-value">
+                        {{ medication['time_to_take'] or 'Not specified' }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Frequency
+                    </label>
+
+                    <div class="detail-value">
+                        {{ medication['frequency'] or 'Not specified' }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Start Date
+                    </label>
+
+                    <div class="detail-value">
+                        {{ medication['start_date'] or 'Not specified' }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        End Date
+                    </label>
+
+                    <div class="detail-value">
+                        {{ medication['end_date'] or 'Ongoing' }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-banner">
+
+            <div class="info-icon">
+                !
+            </div>
+
+            <div>
+
+                <strong>
+                    This action cannot be undone.
+                </strong>
+
+                <p>
+                    Deleting this medication will also remove its recorded
+                    dose information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-footer">
+
+            <div class="required-note">
+                Make sure you have selected the correct medication.
+            </div>
+
+
+            <div class="form-actions">
+
+                <a
+                    href="{{ url_for('medications') }}"
+                    class="secondary-button"
+                >
+                    Cancel
+                </a>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('delete_medication', medication_id=medication['id']) }}"
+                >
+
+                    <button
+                        type="submit"
+                        class="danger-button"
+                    >
+                        Delete Medication
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

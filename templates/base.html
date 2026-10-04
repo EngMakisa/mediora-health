@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}MEDIORA HEALTH{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<meta name="theme-color" content="#0b6e8e">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <!-- BRAND -->
+        <div class="brand">
+
+            <a href="{{ url_for('dashboard') }}" class="brand-link">
+
+                <div class="brand-logo">
+
+                    <div class="brand-cross"></div>
+
+                    <div class="brand-capsule">
+                        <span class="capsule-blue"></span>
+                        <span class="capsule-green"></span>
+                    </div>
+
+                </div>
+
+                <div class="brand-name">
+
+                    <strong>MEDIORA</strong>
+
+                    <span>HEALTH</span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+        <nav class="sidebar-navigation">
+
+            <!-- MAIN -->
+            <div class="nav-group">
+
+                <span class="nav-group-title">
+                    MAIN
+                </span>
+
+                <a
+                    href="{{ url_for('dashboard') }}"
+                    class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}"
+                >
+
+                    <span class="nav-icon nav-dashboard"></span>
+
+                    <span>Overview</span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('medications') }}"
+                    class="nav-link {% if request.endpoint == 'medications' %}active{% endif %}"
+                >
+
+                    <span class="nav-icon nav-medication"></span>
+
+                    <span>My Medications</span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('dashboard') }}#todays-schedule"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon nav-calendar"></span>
+
+                    <span>Today's Schedule</span>
+
+                </a>
+
+            </div>
+
+
+            <!-- HEALTH -->
+            <div class="nav-group">
+
+                <span class="nav-group-title">
+                    HEALTH
+                </span>
+
+
+                <a
+                    href="{{ url_for('prescriptions') }}"
+                    class="nav-link {% if request.endpoint == 'prescriptions' %}active{% endif %}"
+                >
+
+                    <span class="nav-icon nav-prescription"></span>
+
+                    <span>Prescriptions</span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('adherence') }}"
+                    class="nav-link {% if request.endpoint == 'adherence' %}active{% endif %}"
+                >
+
+                    <span class="nav-icon nav-adherence"></span>
+
+                    <span>Adherence</span>
+
+                </a>
+
+            </div>
+
+
+            <!-- TOOLS -->
+            <div class="nav-group">
+
+                <span class="nav-group-title">
+                    TOOLS
+                </span>
+
+
+                <a href="#" class="nav-link nav-disabled">
+
+                    <span class="nav-icon nav-assistant"></span>
+
+                    <span>Mediora Assistant</span>
+
+                    <small>SOON</small>
+
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <!-- SIDEBAR FOOTER -->
+        <div class="sidebar-footer">
+
+            <div class="sidebar-profile">
+
+                <div class="profile-avatar">
+
+                    {% if session.get("user_name") %}
+                        {{ session.get("user_name")[0]|upper }}
+                    {% else %}
+                        M
+                    {% endif %}
+
+                </div>
+
+
+                <div class="profile-details">
+
+                    <strong>
+
+                        {% if session.get("user_name") %}
+                            {{ session.get("user_name") }}
+                        {% else %}
+                            User
+                        {% endif %}
+
+                    </strong>
+
+                    <span>
+                        Patient account
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="logout-link"
+            >
+
+                <span class="logout-icon"></span>
+
+                <span>Log out</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN AREA -->
+    <main class="main-content">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+</div>
+</main>
+</div>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("/service-worker.js")
+                .then(function () {
+                    console.log("MEDIORA service worker registered.");
+                })
+                .catch(function (error) {
+                    console.error("MEDIORA service worker registration failed:", error);
+                });
+        });
+    }
+</script>
+
+</body>
+</html>
+</body>
+</html>

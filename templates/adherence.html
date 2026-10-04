@@ -1,0 +1,176 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}Adherence | MEDIORA HEALTH{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-eyebrow">
+                HEALTH MONITORING
+            </div>
+
+            <h1 class="page-title">
+                Adherence
+            </h1>
+
+            <p class="page-description">
+                Review your medication-taking activity and adherence progress.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a href="{{ url_for('adherence', period='7') }}" class="secondary-button">
+                7 Days
+            </a>
+
+            <a href="{{ url_for('adherence', period='30') }}" class="secondary-button">
+                30 Days
+            </a>
+
+            <a href="{{ url_for('adherence', period='90') }}" class="secondary-button">
+                90 Days
+            </a>
+
+            <a href="{{ url_for('adherence', period='all') }}" class="secondary-button">
+                All Time
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="adherence-summary">
+
+        <div class="adherence-card">
+
+            <div class="adherence-card-label">
+                ADHERENCE
+            </div>
+
+            <div class="adherence-card-value">
+                {{ adherence.adherence_percentage|default(0) }}%
+            </div>
+
+            <div class="adherence-card-description">
+                Overall medication adherence
+            </div>
+
+            <div class="adherence-progress">
+                <div class="adherence-progress-bar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="adherence-card">
+
+            <div class="adherence-card-label">
+                TAKEN
+            </div>
+
+            <div class="adherence-card-value">
+                {{ adherence.taken_doses|default(0) }}
+            </div>
+
+            <div class="adherence-card-description">
+                Doses successfully taken
+            </div>
+
+        </div>
+
+
+        <div class="adherence-card">
+
+            <div class="adherence-card-label">
+                SKIPPED
+            </div>
+
+            <div class="adherence-card-value">
+                {{ adherence.skipped_doses|default(0) }}
+            </div>
+
+            <div class="adherence-card-description">
+                Doses marked as skipped
+            </div>
+
+        </div>
+
+
+        <div class="adherence-card">
+
+            <div class="adherence-card-label">
+                PENDING
+            </div>
+
+            <div class="adherence-card-value">
+                {{ adherence.pending_doses|default(0) }}
+            </div>
+
+            <div class="adherence-card-description">
+                Doses still awaiting action
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-section">
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <h2>
+                    Adherence Overview
+                </h2>
+
+                <p>
+                    Your medication activity for the selected period.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-section-body">
+
+            <div class="info-banner">
+
+                <div class="info-icon">
+                    i
+                </div>
+
+                <div>
+
+                    <strong>
+                        Keep your medication schedule consistent.
+                    </strong>
+
+                    <p>
+                        Taking medications according to their prescribed schedule
+                        helps you maintain an accurate adherence record.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

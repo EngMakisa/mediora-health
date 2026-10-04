@@ -1,0 +1,1989 @@
+/* =========================================================
+   MEDIORA HEALTH
+   UNIFIED APPLICATION STYLE
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+    background: #f5f8fa;
+    color: #17212b;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   APPLICATION LAYOUT
+   ========================================================= */
+
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f8fa;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-right: 1px solid #e5ebef;
+    z-index: 100;
+}
+
+
+/* BRAND */
+
+.brand {
+    padding: 26px 24px 24px;
+    border-bottom: 1px solid #eef2f4;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.brand-logo {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.brand-cross {
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    background: #2db58b;
+    border-radius: 5px;
+}
+
+.brand-cross::before {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 27px;
+    background: #ffffff;
+    left: 7px;
+    top: -2px;
+    border-radius: 2px;
+}
+
+.brand-cross::after {
+    content: "";
+    position: absolute;
+    width: 27px;
+    height: 9px;
+    background: #ffffff;
+    left: -2px;
+    top: 7px;
+    border-radius: 2px;
+}
+
+.brand-capsule {
+    position: absolute;
+    width: 29px;
+    height: 14px;
+    display: flex;
+    overflow: hidden;
+    transform: rotate(-35deg);
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.brand-capsule span {
+    width: 50%;
+    height: 100%;
+}
+
+.capsule-blue {
+    background: #2474d8;
+}
+
+.capsule-green {
+    background: #2db58b;
+}
+
+.brand-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-name strong {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.brand-name span {
+    margin-top: 5px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+}
+
+
+/* =========================================================
+   SIDEBAR NAVIGATION
+   ========================================================= */
+
+.sidebar-navigation {
+    flex: 1;
+    padding: 24px 14px;
+    overflow-y: auto;
+}
+
+.nav-group {
+    margin-bottom: 28px;
+}
+
+.nav-group-title {
+    display: block;
+    padding: 0 12px;
+    margin-bottom: 9px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #8b98a4;
+}
+
+.nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 0 12px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #667480;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover {
+    background: #f1f7f5;
+    color: #1f8f70;
+}
+
+.nav-link.active {
+    background: #eaf7f3;
+    color: #168365;
+}
+
+.nav-link small {
+    margin-left: auto;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    color: #9aa6ae;
+}
+
+.nav-disabled {
+    cursor: default;
+    opacity: 0.65;
+}
+
+.nav-disabled:hover {
+    background: transparent;
+    color: #667480;
+}
+
+
+/* NAV ICONS */
+
+.nav-icon {
+    position: relative;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+.nav-dashboard::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border: 2px solid currentColor;
+    border-radius: 4px;
+}
+
+.nav-dashboard::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    top: 6px;
+    left: 6px;
+    background: currentColor;
+    border-radius: 1px;
+}
+
+.nav-medication::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 8px;
+    top: 4px;
+    left: 1px;
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    transform: rotate(-35deg);
+}
+
+.nav-medication::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background: currentColor;
+    top: 3px;
+    left: 8px;
+    transform: rotate(-35deg);
+}
+
+.nav-calendar::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+}
+
+.nav-calendar::after {
+    content: "";
+    position: absolute;
+    width: 11px;
+    height: 2px;
+    left: 3px;
+    top: 7px;
+    background: currentColor;
+}
+
+.nav-prescription::before {
+    content: "";
+    position: absolute;
+    inset: 2px 3px;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+}
+
+.nav-prescription::after {
+    content: "Rx";
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    font-size: 7px;
+    font-weight: 800;
+}
+
+.nav-adherence::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+}
+
+.nav-adherence::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 4px;
+    left: 5px;
+    top: 5px;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+}
+
+.nav-assistant::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border: 2px solid currentColor;
+    border-radius: 5px;
+}
+
+.nav-assistant::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    top: 6px;
+    left: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+    padding: 18px 16px;
+    border-top: 1px solid #eef2f4;
+}
+
+.sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.profile-avatar {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #eaf7f3;
+    color: #168365;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.profile-details {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-details strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.profile-details span {
+    margin-top: 3px;
+    font-size: 9px;
+    color: #8996a0;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    color: #75828c;
+}
+
+.logout-link:hover {
+    background: #f5f7f8;
+    color: #d14f4f;
+}
+
+.logout-icon {
+    position: relative;
+    width: 15px;
+    height: 15px;
+}
+
+.logout-icon::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: 2px;
+    width: 8px;
+    height: 11px;
+    border: 2px solid currentColor;
+    border-right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.logout-icon::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 2px;
+    top: 7px;
+    right: 0;
+    background: currentColor;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    margin-left: 250px;
+    background: #f5f8fa;
+}
+
+
+/* =========================================================
+   SHARED PAGE CONTAINER
+   ========================================================= */
+
+.page-container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 36px 42px 60px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.page-header-content {
+    min-width: 0;
+}
+
+.page-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #2b9b7b;
+}
+
+.page-title {
+    margin: 0;
+    color: #17212b;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 700;
+}
+
+.page-description {
+    margin: 10px 0 0;
+    max-width: 680px;
+    color: #71808c;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.page-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-button,
+.secondary-button,
+.danger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: 0.2s ease;
+}
+
+.primary-button {
+    border: 1px solid #238c70;
+    background: #2db58b;
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background: #239b78;
+}
+
+.secondary-button {
+    border: 1px solid #d9e1e8;
+    background: #ffffff;
+    color: #52616d;
+}
+
+.secondary-button:hover {
+    border-color: #c5d1d9;
+    background: #f9fbfc;
+}
+
+.danger-button {
+    border: 1px solid #f0cccc;
+    background: #fff7f7;
+    color: #c94d4d;
+}
+
+.danger-button:hover {
+    background: #fff0f0;
+}
+
+
+/* =========================================================
+   SHARED CARDS
+   ========================================================= */
+
+.dashboard-section,
+.overview-card,
+.medication-card,
+.prescription-card,
+.info-banner,
+.medication-form-card,
+.empty-state {
+    background: #ffffff;
+    border: 1px solid #e3e8ed;
+    border-radius: 14px;
+}
+
+
+/* =========================================================
+   INFORMATION BANNER
+   ========================================================= */
+
+.info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 22px;
+    margin-bottom: 26px;
+    background: #f9fcfb;
+    border-color: #dceee8;
+}
+
+.info-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #eaf7f3;
+    color: #19856a;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.info-banner h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.info-banner p {
+    margin: 5px 0 0;
+    color: #71808c;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   DASHBOARD STATS
+   ========================================================= */
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.overview-card {
+    padding: 21px;
+}
+
+.overview-card-label {
+    color: #7b8994;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.overview-card-value {
+    margin-top: 10px;
+    color: #17212b;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.overview-card-description {
+    margin-top: 9px;
+    color: #87939d;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DASHBOARD SECTIONS
+   ========================================================= */
+
+.dashboard-section {
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.dashboard-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e8edf1;
+}
+
+.dashboard-section-header h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.dashboard-section-header p {
+    margin: 5px 0 0;
+    color: #7d8993;
+    font-size: 11px;
+}
+
+.dashboard-section-body {
+    padding: 24px;
+}
+
+
+/* =========================================================
+   MEDICATION LIST
+   ========================================================= */
+
+.medication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.medication-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+}
+
+.medication-card-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.medication-icon,
+.prescription-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #eef8f5;
+    color: #19856a;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.medication-card h2,
+.medication-card h3 {
+    margin: 0;
+    color: #1b2730;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.medication-card p {
+    margin: 5px 0 0;
+    color: #7b8994;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.medication-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.medication-details {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+    padding-top: 17px;
+    border-top: 1px solid #edf1f3;
+}
+
+.detail-label {
+    margin-bottom: 5px;
+    color: #8b97a0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.detail-value {
+    color: #35434e;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.status,
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status-active {
+    background: #eaf7f3;
+    color: #168365;
+}
+
+.status-pending {
+    background: #f2f5f7;
+    color: #71808c;
+}
+
+.status-expired {
+    background: #fff0f0;
+    color: #c94d4d;
+}
+
+.status-warning {
+    background: #fff7e8;
+    color: #a56b15;
+}
+
+
+/* =========================================================
+   PRESCRIPTION GRID
+   ========================================================= */
+
+.prescription-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.prescription-card {
+    padding: 22px;
+}
+
+.card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.prescription-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.prescription-title h2 {
+    margin: 0;
+    color: #1b2730;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.prescription-title span {
+    display: block;
+    margin-top: 5px;
+    color: #7b8994;
+    font-size: 10px;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid #edf1f3;
+    border-bottom: 1px solid #edf1f3;
+}
+
+.notes {
+    margin-top: 18px;
+}
+
+.notes-title {
+    margin-bottom: 6px;
+    color: #7b8994;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.notes-text {
+    color: #52616d;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   EMPTY STATES
+   ========================================================= */
+
+.empty-state {
+    padding: 60px 30px;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    border-radius: 12px;
+    background: #eef8f5;
+    color: #19856a;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.empty-state h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.empty-state p {
+    max-width: 480px;
+    margin: 9px auto 22px;
+    color: #7b8994;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.medication-form-card {
+    width: 100%;
+    overflow: hidden;
+}
+
+.form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 26px 30px;
+    border-bottom: 1px solid #e8edf1;
+}
+
+.form-header-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #eef8f5;
+}
+
+.form-pill {
+    position: relative;
+    width: 27px;
+    height: 13px;
+    display: flex;
+    overflow: hidden;
+    transform: rotate(-35deg);
+    border-radius: 20px;
+    border: 2px solid #1f9d78;
+}
+
+.form-pill span {
+    width: 50%;
+    height: 100%;
+    display: block;
+}
+
+.form-pill span:first-child {
+    background: #2474d8;
+}
+
+.form-pill span:last-child {
+    background: #2db58b;
+}
+
+.form-card-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.form-card-header p {
+    margin: 5px 0 0;
+    color: #71808c;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.medication-form {
+    width: 100%;
+}
+
+.form-section {
+    padding: 30px;
+    border-bottom: 1px solid #e8edf1;
+}
+
+.form-section-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.form-section-number {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #f0f6fc;
+    color: #2474d8;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.form-section-heading h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-section-heading p {
+    margin: 5px 0 0;
+    color: #7b8994;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.form-field label {
+    margin-bottom: 8px;
+    color: #35434e;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.form-field label span {
+    margin-left: 2px;
+    color: #d35454;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d7dfe6;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #26343e;
+    padding: 12px 13px;
+    font: inherit;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field input,
+.form-field select {
+    height: 44px;
+}
+
+.form-field textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: #2c8fd6;
+    box-shadow: 0 0 0 3px rgba(44, 143, 214, 0.10);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: #9aa6ae;
+}
+
+.form-field small {
+    margin-top: 7px;
+    color: #8a969f;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.form-section:last-of-type .form-field {
+    width: 100%;
+}
+
+
+/* =========================================================
+   FORM FOOTER
+   ========================================================= */
+
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 30px;
+    background: #fafcfd;
+}
+
+.required-note {
+    color: #8996a0;
+    font-size: 10px;
+}
+
+.required-note span {
+    color: #d35454;
+    font-weight: 700;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   ADHERENCE
+   ========================================================= */
+
+.adherence-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.adherence-card {
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e3e8ed;
+    border-radius: 14px;
+}
+
+.adherence-card-label {
+    color: #7b8994;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.adherence-card-value {
+    margin-top: 10px;
+    color: #17212b;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.adherence-card-description {
+    margin-top: 7px;
+    color: #8a969f;
+    font-size: 10px;
+}
+
+.adherence-progress {
+    height: 8px;
+    margin-top: 14px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #edf1f3;
+}
+
+.adherence-progress-bar {
+    height: 100%;
+    border-radius: inherit;
+    background: #2db58b;
+}
+
+
+/* =========================================================
+   SCHEDULE
+   ========================================================= */
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-item {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid #edf1f3;
+}
+
+.schedule-item:last-child {
+    border-bottom: 0;
+}
+
+.schedule-time {
+    color: #2474d8;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.schedule-medication {
+    min-width: 0;
+}
+
+.schedule-medication strong {
+    display: block;
+    color: #26343e;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.schedule-medication span {
+    display: block;
+    margin-top: 4px;
+    color: #7d8993;
+    font-size: 10px;
+}
+
+.schedule-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .prescription-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .adherence-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .app-shell {
+        display: block;
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .page-container {
+        padding: 28px 22px 45px;
+    }
+
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .page-actions {
+        width: 100%;
+    }
+
+    .page-actions a,
+    .page-actions button {
+        width: 100%;
+    }
+
+    .dashboard-stats,
+    .adherence-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-section {
+        padding: 24px 20px;
+    }
+
+    .form-card-header {
+        padding: 22px 20px;
+    }
+
+    .form-footer {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .form-actions {
+        width: 100%;
+    }
+
+    .form-actions a,
+    .form-actions button {
+        flex: 1;
+    }
+
+    .medication-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .medication-card-actions {
+        width: 100%;
+    }
+
+    .medication-card-actions a,
+    .medication-card-actions button {
+        flex: 1;
+    }
+
+    .medication-details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .schedule-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .schedule-actions {
+        width: 100%;
+    }
+
+    .schedule-actions button,
+    .schedule-actions a {
+        flex: 1;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .page-container {
+        padding: 22px 15px 35px;
+    }
+
+    .page-title {
+        font-size: 27px;
+    }
+
+    .details {
+        grid-template-columns: 1fr;
+    }
+
+    .medication-details {
+        grid-template-columns: 1fr;
+    }
+
+    .info-banner {
+        padding: 17px;
+    }
+
+    .dashboard-section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+/* ============================================================
+   MEDIORA LOGIN PAGE — LOGIN ONLY
+   This section does not modify the sidebar or other pages.
+   ============================================================ */
+
+.login-page {
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(420px, 0.95fr) minmax(520px, 1.05fr);
+    background: #f6f9fb;
+    overflow: hidden;
+}
+
+.login-card {
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 64px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 58px;
+}
+
+.login-brand h1 {
+    margin: 0;
+    color: #24343f;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.login-brand p {
+    margin: 4px 0 0;
+    color: #82909a;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.login-logo {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+.login-cross {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: 11px;
+    top: 11px;
+    border-radius: 6px;
+    background: #2474d8;
+}
+
+.login-cross::before,
+.login-cross::after {
+    content: "";
+    position: absolute;
+    background: #ffffff;
+    border-radius: 2px;
+}
+
+.login-cross::before {
+    width: 13px;
+    height: 5px;
+    left: 6px;
+    top: 10px;
+}
+
+.login-cross::after {
+    width: 5px;
+    height: 13px;
+    left: 10px;
+    top: 6px;
+}
+
+.login-capsule {
+    position: absolute;
+    right: 0;
+    bottom: 1px;
+    width: 27px;
+    height: 14px;
+    border-radius: 14px;
+    transform: rotate(-35deg);
+    overflow: hidden;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(38, 52, 62, 0.12);
+}
+
+.capsule-part-blue {
+    display: block;
+    width: 50%;
+    height: 100%;
+    float: left;
+    background: #2474d8;
+}
+
+.capsule-part-green {
+    display: block;
+    width: 50%;
+    height: 100%;
+    float: right;
+    background: #21a982;
+}
+
+.login-heading {
+    margin-bottom: 30px;
+}
+
+.login-heading > span {
+    display: block;
+    margin-bottom: 10px;
+    color: #2474d8;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.login-heading h2 {
+    margin: 0;
+    color: #26343e;
+    font-size: 34px;
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.login-heading p {
+    max-width: 390px;
+    margin: 12px 0 0;
+    color: #7b8993;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.login-alert {
+    margin-bottom: 22px;
+    padding: 12px 14px;
+    border: 1px solid #f1d5d5;
+    border-radius: 8px;
+    background: #fff6f6;
+}
+
+.login-alert p {
+    margin: 0;
+    color: #bd4b4b;
+    font-size: 12px;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 440px;
+}
+
+.login-field {
+    margin-bottom: 20px;
+}
+
+.login-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #354550;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.login-field input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border: 1px solid #dfe6ea;
+    border-radius: 8px;
+    outline: none;
+    background: #fbfcfd;
+    color: #26343e;
+    font-family: inherit;
+    font-size: 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.login-field input::placeholder {
+    color: #a4afb6;
+}
+
+.login-field input:focus {
+    border-color: #2474d8;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(36, 116, 216, 0.08);
+}
+
+.login-button {
+    width: 100%;
+    height: 50px;
+    margin-top: 5px;
+    border: 0;
+    border-radius: 8px;
+    background: #2474d8;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.login-button:hover {
+    background: #1f68c2;
+    box-shadow: 0 8px 20px rgba(36, 116, 216, 0.16);
+    transform: translateY(-1px);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.login-register {
+    max-width: 440px;
+    margin-top: 22px;
+    text-align: center;
+    color: #89959d;
+    font-size: 11px;
+}
+
+.login-register a {
+    margin-left: 4px;
+    color: #2474d8;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-register a:hover {
+    text-decoration: underline;
+}
+
+.login-security {
+    max-width: 440px;
+    margin-top: 34px;
+    padding: 15px 17px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    box-sizing: border-box;
+    border: 1px solid #e2eee9;
+    border-radius: 9px;
+    background: #f7fbf9;
+}
+
+.security-icon {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e3f4ee;
+    color: #168365;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.login-security strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #34454f;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.login-security p {
+    margin: 0;
+    color: #819099;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.login-side {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 80px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #eef6f7;
+}
+
+.login-side::before {
+    content: "";
+    position: absolute;
+    width: 430px;
+    height: 430px;
+    top: -160px;
+    right: -120px;
+    border-radius: 50%;
+    background: rgba(36, 116, 216, 0.07);
+}
+
+.login-side::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    bottom: -150px;
+    left: -100px;
+    border-radius: 50%;
+    background: rgba(33, 169, 130, 0.08);
+}
+
+.side-content {
+    position: relative;
+    z-index: 1;
+    max-width: 510px;
+}
+
+.side-eyebrow {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #168365;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+}
+
+.side-content h2 {
+    margin: 0;
+    color: #26343e;
+    font-size: 42px;
+    line-height: 1.12;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.side-content > p {
+    max-width: 470px;
+    margin: 20px 0 34px;
+    color: #71808a;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.side-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.side-feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 17px;
+    border: 1px solid rgba(214, 225, 228, 0.85);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 4px 16px rgba(38, 52, 62, 0.03);
+}
+
+.feature-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #2474d8;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.side-feature strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #34454f;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.side-feature span {
+    display: block;
+    color: #84919a;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+@media (max-width: 1050px) {
+    .login-card {
+        padding: 50px 45px;
+    }
+
+    .login-side {
+        padding: 50px 45px;
+    }
+
+    .side-content h2 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 850px) {
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-card {
+        min-height: auto;
+        padding: 45px 30px;
+    }
+
+    .login-side {
+        min-height: auto;
+        padding: 55px 30px;
+    }
+
+    .login-brand {
+        margin-bottom: 45px;
+    }
+}
+
+@media (max-width: 500px) {
+    .login-card {
+        padding: 35px 20px;
+    }
+
+    .login-side {
+        padding: 45px 20px;
+    }
+
+    .login-heading h2 {
+        font-size: 29px;
+    }
+
+    .side-content h2 {
+        font-size: 31px;
+    }
+}
+/* ============================================================
+   MEDIORA MOBILE RESPONSIVE LAYOUT
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .app-shell {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: relative;
+    }
+
+    .sidebar-navigation {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 16px;
+    }
+
+    .nav-group {
+        width: 100%;
+    }
+
+    .nav-group-title {
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        width: auto;
+        margin-right: 6px;
+    }
+
+    .sidebar-footer {
+        padding: 14px 16px;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 20px 16px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .brand {
+        padding: 18px 16px;
+    }
+
+    .brand-name strong {
+        font-size: 19px;
+    }
+
+    .brand-name span {
+        font-size: 9px;
+    }
+
+    .sidebar-navigation {
+        padding: 8px 12px;
+    }
+
+    .nav-link {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .main-content {
+        padding: 16px 12px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .dashboard-grid,
+    .stats-grid,
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card,
+    .dashboard-card,
+    .stat-card {
+        width: 100%;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        max-width: 100%;
+    }
+}

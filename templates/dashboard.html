@@ -1,0 +1,513 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}Overview - MEDIORA HEALTH{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="page-eyebrow">
+                MEDICATION MANAGEMENT
+            </div>
+
+            <h1 class="page-title">
+                Overview
+            </h1>
+
+            <p class="page-description">
+                Welcome{% if user %}, {{ user["full_name"] }}{% endif %}.
+                Review today's medication schedule and activity.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a
+                href="{{ url_for('add_medication') }}"
+                class="primary-button"
+            >
+                Add Medication
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- TODAY INFORMATION -->
+    <div class="info-banner">
+
+        <div class="info-icon">
+            T
+        </div>
+
+        <div>
+
+            <h3>
+                Today's Medication Routine
+            </h3>
+
+            <p>
+                Review your scheduled doses below and record each
+                medication as taken, snoozed or skipped.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- OVERVIEW CARDS -->
+    <section class="dashboard-section">
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <h2>
+                    Today's Activity
+                </h2>
+
+                <p>
+                    A summary of your medication doses for today.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-section-body">
+
+            <div class="dashboard-stats">
+
+                <div class="overview-card">
+
+                    <div class="overview-card-label">
+                        Scheduled Doses
+                    </div>
+
+                    <div class="overview-card-value">
+                        {{ total_doses }}
+                    </div>
+
+                    <div class="overview-card-description">
+                        Total doses planned for today.
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <div class="overview-card-label">
+                        Completed
+                    </div>
+
+                    <div class="overview-card-value">
+                        {{ completed_doses }}
+                    </div>
+
+                    <div class="overview-card-description">
+                        Doses recorded as taken.
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <div class="overview-card-label">
+                        Pending
+                    </div>
+
+                    <div class="overview-card-value">
+                        {{ pending_doses }}
+                    </div>
+
+                    <div class="overview-card-description">
+                        Doses awaiting action.
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <div class="overview-card-label">
+                        Due Now
+                    </div>
+
+                    <div class="overview-card-value">
+                        {{ due_doses }}
+                    </div>
+
+                    <div class="overview-card-description">
+                        Doses currently requiring attention.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TODAY'S SCHEDULE -->
+    <section
+        class="dashboard-section"
+        id="todays-schedule"
+    >
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <h2>
+                    Today's Schedule
+                </h2>
+
+                <p>
+                    Review and record your scheduled medication doses.
+                </p>
+
+            </div>
+
+            <a
+                href="{{ url_for('medications') }}"
+                class="secondary-button"
+            >
+                My Medications
+            </a>
+
+        </div>
+
+
+        <div class="dashboard-section-body">
+
+            {% if doses %}
+
+                <div class="schedule-list">
+
+                    {% for dose in doses %}
+
+                        <div class="schedule-item">
+
+                            <!-- TIME -->
+
+                            <div class="schedule-time">
+
+                                {{ dose["scheduled_time"] }}
+
+                            </div>
+
+
+                            <!-- MEDICATION -->
+
+                            <div class="schedule-medication">
+
+                                <strong>
+                                    {{ dose["medication_name"] }}
+                                </strong>
+
+                                <span>
+
+                                    {{ dose["dosage"] }}
+
+                                    {% if dose["frequency"] %}
+                                        · {{ dose["frequency"] }}
+                                    {% endif %}
+
+                                    {% if dose["instructions"] %}
+                                        · {{ dose["instructions"] }}
+                                    {% endif %}
+
+                                </span>
+
+                            </div>
+
+
+                            <!-- STATUS -->
+
+                            <div>
+
+                                {% if dose["status"] == "Taken" %}
+
+                                    <span class="status status-active">
+                                        Taken
+                                    </span>
+
+                                {% elif dose["status"] == "Skipped" %}
+
+                                    <span class="status status-expired">
+                                        Skipped
+                                    </span>
+
+                                {% elif dose["status"] == "Snoozed" %}
+
+                                    <span class="status status-warning">
+                                        Snoozed
+                                    </span>
+
+                                {% elif dose["is_due"] %}
+
+                                    <span class="status status-warning">
+                                        Due Now
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status status-pending">
+                                        Pending
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="schedule-actions">
+
+                                {% if dose["status"] == "Pending" or dose["status"] == "Snoozed" %}
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('update_dose', dose_id=dose['dose_id'], status='Taken') }}"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="primary-button"
+                                        >
+                                            Mark Taken
+                                        </button>
+
+                                    </form>
+
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('update_dose', dose_id=dose['dose_id'], status='Snoozed') }}"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="secondary-button"
+                                        >
+                                            Snooze
+                                        </button>
+
+                                    </form>
+
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('update_dose', dose_id=dose['dose_id'], status='Skipped') }}"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="danger-button"
+                                        >
+                                            Skip
+                                        </button>
+
+                                    </form>
+
+                                {% else %}
+
+                                    <span class="status status-pending">
+                                        Dose Recorded
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        T
+                    </div>
+
+                    <h2>
+                        No medication scheduled
+                    </h2>
+
+                    <p>
+                        Add a medication with a scheduled time to
+                        begin building your daily medication routine.
+                    </p>
+
+                    <a
+                        href="{{ url_for('add_medication') }}"
+                        class="primary-button"
+                    >
+                        Add Medication
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- DAILY SUMMARY -->
+    <section class="dashboard-section">
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <h2>
+                    Daily Summary
+                </h2>
+
+                <p>
+                    Medication activity recorded today.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-section-body">
+
+            <div class="adherence-summary">
+
+                <div class="adherence-card">
+
+                    <div class="adherence-card-label">
+                        Completed
+                    </div>
+
+                    <div class="adherence-card-value">
+                        {{ completed_doses }}
+                    </div>
+
+                    <div class="adherence-card-description">
+                        Doses recorded as taken.
+                    </div>
+
+                </div>
+
+
+                <div class="adherence-card">
+
+                    <div class="adherence-card-label">
+                        Pending
+                    </div>
+
+                    <div class="adherence-card-value">
+                        {{ pending_doses }}
+                    </div>
+
+                    <div class="adherence-card-description">
+                        Doses awaiting action.
+                    </div>
+
+                </div>
+
+
+                <div class="adherence-card">
+
+                    <div class="adherence-card-label">
+                        Skipped
+                    </div>
+
+                    <div class="adherence-card-value">
+                        {{ skipped_doses }}
+                    </div>
+
+                    <div class="adherence-card-description">
+                        Doses marked as skipped.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACCESS -->
+    <section class="dashboard-section">
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <h2>
+                    Health Management
+                </h2>
+
+                <p>
+                    Access the main areas of your Mediora account.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-section-body">
+
+            <div class="form-actions">
+
+                <a
+                    href="{{ url_for('medications') }}"
+                    class="secondary-button"
+                >
+                    My Medications
+                </a>
+
+                <a
+                    href="{{ url_for('prescriptions') }}"
+                    class="secondary-button"
+                >
+                    Prescriptions
+                </a>
+
+                <a
+                    href="{{ url_for('adherence') }}"
+                    class="secondary-button"
+                >
+                    Adherence
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
+```

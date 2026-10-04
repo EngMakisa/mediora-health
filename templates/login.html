@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}Login - MEDIORA{% endblock %}
+
+{% block content %}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-brand">
+
+            <div class="login-logo">
+                <div class="login-cross"></div>
+
+                <div class="login-capsule">
+                    <span class="capsule-part-blue"></span>
+                    <span class="capsule-part-green"></span>
+                </div>
+            </div>
+
+            <div>
+                <h1>MEDIORA</h1>
+                <p>Medication care, simplified.</p>
+            </div>
+
+        </div>
+
+        <div class="login-heading">
+            <span>SECURE ACCESS</span>
+            <h2>Welcome back</h2>
+
+            <p>
+                Sign in to manage your medications,
+                prescriptions and adherence.
+            </p>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="login-alert">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form
+            action="{{ url_for('login') }}"
+            method="POST"
+            class="login-form"
+        >
+
+            <div class="login-field">
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    value="{{ request.form.get('email', '') }}"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="login-field">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-button">
+                Sign In
+            </button>
+
+        </form>
+
+        <div class="login-register">
+            <span>Don't have a MEDIORA account?</span>
+
+            <a href="{{ url_for('register') }}">
+                Create an account
+            </a>
+        </div>
+
+        <div class="login-security">
+
+            <span class="security-icon">✓</span>
+
+            <div>
+                <strong>Your information is protected</strong>
+
+                <p>
+                    MEDIORA keeps your medication records
+                    organized for easier treatment management.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="login-side">
+
+        <div class="side-content">
+
+            <span class="side-eyebrow">
+                MEDICATION MANAGEMENT
+            </span>
+
+            <h2>
+                Stay organised.<br>
+                Stay on schedule.
+            </h2>
+
+            <p>
+                MEDIORA brings your medication schedules,
+                prescriptions and adherence records together
+                in one simple system.
+            </p>
+
+            <div class="side-features">
+
+                <div class="side-feature">
+
+                    <div class="feature-icon">✓</div>
+
+                    <div>
+                        <strong>Medication Tracking</strong>
+
+                        <span>
+                            Keep your medicines and schedules organised.
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="side-feature">
+
+                    <div class="feature-icon">+</div>
+
+                    <div>
+                        <strong>Prescription Management</strong>
+
+                        <span>
+                            Keep prescription information in one place.
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="side-feature">
+
+                    <div class="feature-icon">%</div>
+
+                    <div>
+                        <strong>Adherence Monitoring</strong>
+
+                        <span>
+                            Understand your medication-taking progress.
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

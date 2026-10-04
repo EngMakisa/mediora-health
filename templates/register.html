@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | MEDIORA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f6f9fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            font-family: "Inter", sans-serif;
+            color: #26343e;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 46px 48px;
+            border: 1px solid #e7edef;
+            border-radius: 12px;
+            box-shadow: 0 12px 35px rgba(38, 52, 62, 0.07);
+        }
+
+        .register-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            margin-bottom: 30px;
+        }
+
+        .register-logo {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        .register-cross {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            left: 10px;
+            top: 10px;
+            border-radius: 6px;
+            background: #2474d8;
+        }
+
+        .register-cross::before,
+        .register-cross::after {
+            content: "";
+            position: absolute;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+
+        .register-cross::before {
+            width: 13px;
+            height: 5px;
+            left: 6px;
+            top: 10px;
+        }
+
+        .register-cross::after {
+            width: 5px;
+            height: 13px;
+            left: 10px;
+            top: 6px;
+        }
+
+        .register-capsule {
+            position: absolute;
+            right: 0;
+            bottom: 1px;
+            width: 28px;
+            height: 14px;
+            border-radius: 14px;
+            transform: rotate(-35deg);
+            overflow: hidden;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(38, 52, 62, 0.12);
+        }
+
+        .capsule-blue {
+            display: block;
+            width: 50%;
+            height: 100%;
+            float: left;
+            background: #2474d8;
+        }
+
+        .capsule-green {
+            display: block;
+            width: 50%;
+            height: 100%;
+            float: right;
+            background: #21a982;
+        }
+
+        .brand-name strong {
+            display: block;
+            color: #26343e;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-name span {
+            display: block;
+            margin-top: 3px;
+            color: #84919a;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .register-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-heading span {
+            display: block;
+            margin-bottom: 8px;
+            color: #168365;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .register-heading h1 {
+            color: #26343e;
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .register-heading p {
+            margin-top: 9px;
+            color: #7d8993;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #354550;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 48px;
+            padding: 0 14px;
+            border: 1px solid #dfe6ea;
+            border-radius: 8px;
+            outline: none;
+            background: #fbfcfd;
+            color: #26343e;
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .form-group input:focus {
+            border-color: #2474d8;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(36, 116, 216, 0.08);
+        }
+
+        .register-button {
+            width: 100%;
+            height: 49px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 8px;
+            background: #2474d8;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .register-button:hover {
+            background: #1f68c2;
+        }
+
+        .login-link {
+            margin-top: 24px;
+            text-align: center;
+            color: #89959d;
+            font-size: 11px;
+        }
+
+        .login-link a {
+            margin-left: 4px;
+            color: #2474d8;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .register-security {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 13px 14px;
+            border: 1px solid #e2eee9;
+            border-radius: 8px;
+            background: #f7fbf9;
+        }
+
+        .security-check {
+            width: 21px;
+            height: 21px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e3f4ee;
+            color: #168365;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .register-security p {
+            margin: 0;
+            color: #819099;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 560px) {
+
+            body {
+                padding: 18px;
+            }
+
+            .register-container {
+                padding: 36px 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <div class="register-brand">
+
+            <div class="register-logo">
+                <div class="register-cross"></div>
+
+                <div class="register-capsule">
+                    <span class="capsule-blue"></span>
+                    <span class="capsule-green"></span>
+                </div>
+            </div>
+
+            <div class="brand-name">
+                <strong>MEDIORA</strong>
+                <span>HEALTH</span>
+            </div>
+
+        </div>
+
+        <div class="register-heading">
+
+            <span>NEW PATIENT ACCOUNT</span>
+
+            <h1>Create your account</h1>
+
+            <p>
+                Set up your MEDIORA account to manage your
+                medications, prescriptions and adherence.
+            </p>
+
+        </div>
+
+        <form
+            action="{{ url_for('register') }}"
+            method="POST"
+        >
+
+            <div class="form-group">
+
+                <label for="full_name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="full_name"
+                    name="full_name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm your password"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="register-button"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Sign in
+            </a>
+
+        </div>
+
+        <div class="register-security">
+
+            <span class="security-check">✓</span>
+
+            <p>
+                Your account helps keep your medication
+                information organised and accessible in one place.
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
