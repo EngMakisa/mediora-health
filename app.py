@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 import sqlite3
 from datetime import datetime, timedelta
@@ -12,7 +14,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-app.secret_key = "mediora-secret-key-2026"
+app.secret_key = os.environ.get("SECRET_KEY", "mediora-secret-key-2026") 
 @app.route("/service-worker.js")
 def service_worker():
     return send_from_directory(".", "service-worker.js")
