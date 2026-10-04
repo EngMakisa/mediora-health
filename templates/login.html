@@ -1,8 +1,35 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Login - MEDIORA{% endblock %}
+<head>
 
-{% block content %}
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - MEDIORA</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="manifest"
+        href="{{ url_for('static', filename='manifest.json') }}"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b6e8e"
+    >
+
+</head>
+
+<body>
 
 <div class="login-page">
 
@@ -27,13 +54,16 @@
         </div>
 
         <div class="login-heading">
+
             <span>SECURE ACCESS</span>
+
             <h2>Welcome back</h2>
 
             <p>
                 Sign in to manage your medications,
                 prescriptions and adherence.
             </p>
+
         </div>
 
         {% with messages = get_flashed_messages() %}
@@ -53,7 +83,10 @@
         >
 
             <div class="login-field">
-                <label for="email">Email Address</label>
+
+                <label for="email">
+                    Email Address
+                </label>
 
                 <input
                     type="email"
@@ -64,10 +97,14 @@
                     autocomplete="email"
                     required
                 >
+
             </div>
 
             <div class="login-field">
-                <label for="password">Password</label>
+
+                <label for="password">
+                    Password
+                </label>
 
                 <input
                     type="password"
@@ -77,33 +114,47 @@
                     autocomplete="current-password"
                     required
                 >
+
             </div>
 
-            <button type="submit" class="login-button">
+            <button
+                type="submit"
+                class="login-button"
+            >
                 Sign In
             </button>
 
         </form>
 
         <div class="login-register">
-            <span>Don't have a MEDIORA account?</span>
+
+            <span>
+                Don't have a MEDIORA account?
+            </span>
 
             <a href="{{ url_for('register') }}">
                 Create an account
             </a>
+
         </div>
 
         <div class="login-security">
 
-            <span class="security-icon">✓</span>
+            <span class="security-icon">
+                ✓
+            </span>
 
             <div>
-                <strong>Your information is protected</strong>
+
+                <strong>
+                    Your information is protected
+                </strong>
 
                 <p>
                     MEDIORA keeps your medication records
                     organized for easier treatment management.
                 </p>
+
             </div>
 
         </div>
@@ -133,42 +184,60 @@
 
                 <div class="side-feature">
 
-                    <div class="feature-icon">✓</div>
+                    <div class="feature-icon">
+                        ✓
+                    </div>
 
                     <div>
-                        <strong>Medication Tracking</strong>
+
+                        <strong>
+                            Medication Tracking
+                        </strong>
 
                         <span>
                             Keep your medicines and schedules organised.
                         </span>
+
                     </div>
 
                 </div>
 
                 <div class="side-feature">
 
-                    <div class="feature-icon">+</div>
+                    <div class="feature-icon">
+                        +
+                    </div>
 
                     <div>
-                        <strong>Prescription Management</strong>
+
+                        <strong>
+                            Prescription Management
+                        </strong>
 
                         <span>
                             Keep prescription information in one place.
                         </span>
+
                     </div>
 
                 </div>
 
                 <div class="side-feature">
 
-                    <div class="feature-icon">%</div>
+                    <div class="feature-icon">
+                        %
+                    </div>
 
                     <div>
-                        <strong>Adherence Monitoring</strong>
+
+                        <strong>
+                            Adherence Monitoring
+                        </strong>
 
                         <span>
                             Understand your medication-taking progress.
                         </span>
+
                     </div>
 
                 </div>
@@ -181,4 +250,20 @@
 
 </div>
 
-{% endblock %}
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("/service-worker.js")
+                .catch(function (error) {
+                    console.error(
+                        "MEDIORA service worker registration failed:",
+                        error
+                    );
+                });
+        });
+    }
+</script>
+
+</body>
+
+</html>
